@@ -6,3 +6,6 @@ Start with [project choices](PROJECT.md), [architecture](ARCHITECTURE.md),
 [Ownership](../.project-template/OWNERSHIP.md) distinguishes managed policy from
 project-owned documentation. TODO(owner) marks a deliberate unresolved choice;
 resolve it before claiming product readiness.
+
+[Public distribution proposal](PUBLIC_DISTRIBUTION.md) records private staging
+and unresolved publication gates; it grants no release authority.
