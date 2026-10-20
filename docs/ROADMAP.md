@@ -1,3 +1,6 @@
+Source publication and MIT decisions now follow [PUBLICATION.md](PUBLICATION.md).
+The stage map below does not authorize any tag, Release or bundle upload.
+
 # Upstream stage map (project-owned)
 
 This navigates existing Issues; acceptance lives in those Issues and their PRs.

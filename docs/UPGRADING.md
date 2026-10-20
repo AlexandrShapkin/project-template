@@ -19,9 +19,14 @@ TEMPLATE_SHA is a full reviewed commit and CONSUMER is an existing absolute path
 No network fetch, dependency installation or global configuration is implicit.
 Use Python 3.11+, POSIX and Git. Read the Kit's docs/SYNC.md for trust/failure limits.
 
-Both upstreams/distributions are private. Before copying into any public consumer,
-STOP: obtain separate publication authorization or a reviewed public-safe bundle.
-Neither hashes nor an offline export establish a license or redistribution rights.
+The owner selected MIT for both canonical source repositories and authorized
+public source visibility after safety/rights checks and reviewed merges; see
+[publication status](PUBLICATION.md). No tag/Release is needed to publish source.
+Source visibility does not reclassify private format-1/2 bundles or authorize a
+public format-3 payload. Keep existing pins until independently reviewed migration.
+A source checkout carries LICENSE; public consumer migrations must preserve its
+copyright/permission notice separately in project-owned licensing, outside the six
+managed paths. Hashes establish neither rights nor publisher identity.
 
 ## New private project through GitHub Template
 

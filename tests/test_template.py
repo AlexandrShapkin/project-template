@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def copy_template(destination):
     for name in ('README.md', 'AGENTS.md', 'AGENTS.local.md', 'docs', '.github',
                  '.project-template', '.engineering-kit', 'scripts', 'tests',
-                 '.editorconfig', '.gitignore'):
+                 '.editorconfig', '.gitignore', 'LICENSE'):
         source = ROOT / name
         target = destination / name
         if source.is_dir():
@@ -39,6 +39,13 @@ class TemplateTests(unittest.TestCase):
         (self.root / 'AGENTS.local.md').write_text('Native gates: strict local test\n')
         (self.root / 'docs/ARCHITECTURE.md').write_text('Chosen native design\n')
         self.assertEqual(check(self.root), [])
+
+    def test_creation_retains_license_outside_managed_channels(self):
+        self.assertEqual((self.root / 'LICENSE').read_bytes(), (ROOT / 'LICENSE').read_bytes())
+        from scripts.check_template import ADMIN_FILES, KIT_FILES
+        self.assertNotIn('LICENSE', ADMIN_FILES | KIT_FILES)
+        (self.root / 'LICENSE').unlink()
+        self.assertTrue(any('broken link LICENSE' in error for error in check(self.root)))
 
     def test_drift_missing_link_and_symlink(self):
         (self.root / 'AGENTS.md').write_text('modified')

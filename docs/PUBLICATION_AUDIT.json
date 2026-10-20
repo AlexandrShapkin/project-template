@@ -1,0 +1,107 @@
+{
+  "actions": {
+    "credential_pattern_findings": 0,
+    "new_log_archives_scanned": 3,
+    "previous_scans_reused": 11,
+    "runs_inventoried": 14,
+    "unavailable": 0
+  },
+  "advertised_refs": [
+    "refs/heads/docs/public-distribution-boundary c7a257741e5dff3d037436b396e06a53a477aa62",
+    "refs/heads/feat/issues-6-7-canonical-policy 027d76fa07fc475187d2c932d9672f0aabd87e30",
+    "refs/heads/feat/universal-project-template bda29691062c893a2eff84bcbf0016a3c569a638",
+    "refs/heads/fix/issue-2-release-status 5f41acab11465c83dfee1ba34763322282f27a1f",
+    "refs/heads/main 5087295b7e571e87c3f70f721e26ff4ca7a2e315",
+    "refs/pull/1/head bda29691062c893a2eff84bcbf0016a3c569a638",
+    "refs/pull/3/head 5f41acab11465c83dfee1ba34763322282f27a1f",
+    "refs/pull/5/head c7a257741e5dff3d037436b396e06a53a477aa62",
+    "refs/pull/8/head 027d76fa07fc475187d2c932d9672f0aabd87e30"
+  ],
+  "all_advertised_refs_mirrored": true,
+  "audited_main": "5087295b7e571e87c3f70f721e26ff4ca7a2e315",
+  "current_reachable_object_list_sha256": "a313ebfe5b7972524164ae65bbd619018979f95138d8837b6dd878f9c1e530a4",
+  "date": "2026-10-21",
+  "deleted_historical_paths": [],
+  "limitations": [
+    "bounded pattern scan and source review; no dedicated scanner installed",
+    "undisclosed/unreachable server objects and expired/deleted surfaces cannot be certified",
+    "candidate full HEAD, exact-head CI and final delta are recorded in Draft PR review handoff; this file inventories the refreshed accepted base"
+  ],
+  "metadata": {
+    "credential_pattern_findings": [],
+    "endpoint_record_counts": {
+      "/issues/comments?per_page=100": 8,
+      "/issues?state=all&per_page=100": 8,
+      "/pulls/comments?per_page=100": 0,
+      "/releases?per_page=100": 0
+    },
+    "has_discussions": false,
+    "has_pages": false,
+    "has_wiki": false,
+    "is_template": true,
+    "metadata_characters_scanned": 124526,
+    "private": true,
+    "releases": 0,
+    "retained_action_artifacts": 0,
+    "retained_action_logs": "Covered by actions counts in this audit, reusing previous verified scans",
+    "reviews": 0
+  },
+  "new_binary_objects": [],
+  "new_credential_or_private_key_findings": 0,
+  "new_location_findings": [
+    {
+      "classification": "SAFE TO PUBLISH: task-local evidence paths/examples, no secret value",
+      "lines": [
+        89,
+        90,
+        101
+      ],
+      "path": "docs/GOVERNANCE_AUDIT.md"
+    },
+    {
+      "classification": "SAFE TO PUBLISH: task-local evidence paths/examples, no secret value",
+      "lines": [
+        75,
+        84,
+        96
+      ],
+      "path": "docs/UPGRADING.md"
+    },
+    {
+      "classification": "SAFE TO PUBLISH: task-local evidence paths/examples, no secret value",
+      "lines": [
+        88,
+        89
+      ],
+      "path": "docs/GOVERNANCE_AUDIT.md"
+    }
+  ],
+  "new_objects_since_previous_complete_audit": 31,
+  "object_types": {
+    "blob": 63,
+    "commit": 12,
+    "tree": 40
+  },
+  "other_exposure_surfaces": {
+    "accepted_main_contributor_accounts": [
+      "AlexandrShapkin"
+    ],
+    "attachment_links": 0,
+    "caches": {
+      "records": 0,
+      "status": "EMPTY"
+    },
+    "contribution_commits": [],
+    "deployments": {
+      "records": 0,
+      "status": "EMPTY"
+    },
+    "environments": {
+      "records": 0,
+      "status": "EMPTY"
+    },
+    "url_credentials": 0
+  },
+  "previous_audit_sha256": "29678a740e4351f247162d8598e2b2209b38bb4252fca09d04eb3df91e574fc5",
+  "previous_reachable_object_list_sha256": "7b72de70fa8086aecc11f2a25ec34156dbf4ebf899b1bf25950ff003ff11e198"
+}
