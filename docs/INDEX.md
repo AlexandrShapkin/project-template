@@ -11,3 +11,5 @@ resolve it before claiming product readiness.
 and unresolved publication gates; it grants no release authority.
 
 Current bounded policy audit and Kit handoff: [Issues #6/#7](GOVERNANCE_AUDIT.md).
+
+Source publication: [status](PUBLICATION.md), [rights and notices](SOURCE_RIGHTS.md).

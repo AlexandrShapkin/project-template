@@ -1,7 +1,9 @@
 # project-template
 
-Private, source-only starter for a consistent reviewed development process.
-No application framework, runtime, deployment, credentials or license is chosen.
+Source-only starter for a consistent reviewed development process, under the
+[MIT License](LICENSE). See [publication status](docs/PUBLICATION.md) and
+[source rights](docs/SOURCE_RIGHTS.md). No application framework, runtime,
+deployment or credentials are chosen for consumers.
 
 After **Use this template**, replace this title/purpose and complete
 [project choices](docs/PROJECT.md). Keep [AGENTS.local.md](AGENTS.local.md) for
@@ -15,7 +17,8 @@ operation or use the [offline creation procedure](docs/UPGRADING.md). Run
 `python3 -B -m unittest discover -s tests -v` with Python 3.11+ on POSIX.
 These validate administration only. Select and configure actual native CI before
 claiming product verification. The owner enabled GitHub Template repository;
-`is_template=true` and private visibility were verified on 2026-10-20.
+`is_template=true` and private visibility were verified on 2026-10-20;
+[current publication status](docs/PUBLICATION.md) supersedes that visibility snapshot.
 Use **Use this template → Create a new repository** and select **Private**.
 
 Shared administration is versioned by full template source SHA and hashes in
