@@ -25,8 +25,10 @@ for an existing consumer. Existing consumers must use the documented migration.
 ## Commands and results
 
 - `python3 -B scripts/check_template.py`: PASS, managed hashes and relative links.
-- `python3 -B -m unittest discover -s tests -v`: PASS, 2 template tests with
-  offline creation/local edits and negative drift/link/symlink cases.
+- `python3 -B -m unittest discover -s tests -v`: PASS, 8 template tests with
+  offline creation/local edits, strict lock/bundle schema and pin validation,
+  content/hash/manifest consistency, symlink/missing/unsafe-path cases, bounded
+  JSON/duplicate-key rejection and controlled CLI failure without traceback.
 - `python3 -B scripts/pilot.py --kit /tmp/project-template-kit`: PASS, real
   disposable Git repositories, exact-commit export, one upstream lifecycle
   update, consumer commit, rollback commit, idempotence, separate Kit profile
@@ -60,3 +62,20 @@ consumer-owned and receives only manual reviewed proposals.
 Temporary pilot and unittest fixtures were removed by their context managers.
 The own Kit checkout `/tmp/project-template-kit` and both open PR branches are
 retained for independent review. No user branch, worktree or data was deleted.
+
+## PR #1 review corrections
+
+P2: integrity checks now read both retained bundles and both installed locks,
+validate channel-specific schemas and exact distribution file sets, verify UTF-8
+contents/SHA-256, and require retained manifests to equal installed locks. The
+Kit format-1 manifest intentionally has no owner/publication fields; unknown
+fields are rejected, while private distribution and the full Kit pin are checked
+through tooling.json. Administrative owner/private classification are mandatory.
+No packaging HEAD comparison is made; the source/package split remains valid.
+
+P3: all artifact reads are limited to 1 MiB and regular non-symlink paths, JSON
+nesting is limited to 64, duplicate keys/nonstandard constants are rejected, and
+parser RecursionError is reported as a validation failure. Negative tests cover
+a 10,000-level JSON input and exercise the CLI's nonzero exit without traceback.
+This is a read-only distribution checker, not a second synchronization engine.
+Kit #10 is unchanged. Updated exact-head CI evidence is recorded in PR #1.

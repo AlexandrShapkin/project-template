@@ -83,8 +83,16 @@ record the full source/package SHAs for review. GitHub template availability
    # Example applies only when exactly those two paths change.
    ```
 
-5. Inspect `git diff`, retain the bundle in a trusted private location, run
-   template integrity and all consumer native gates, and repeat plan (empty).
+5. Preserve the previous retained bundle separately for rollback, then copy the
+   reviewed new bundle to `.project-template/bundles/initial.json`. Despite its
+   historical filename, this is the current installed admin bundle. Its manifest
+   must equal the installed administrative lock. For a Kit update, likewise
+   preserve the old bundle, replace `.engineering-kit/bundles/baseline.json` with
+   the reviewed installed bundle and update `kit_baseline` in tooling.json to
+   the installed full Kit SHA. This metadata/artifact maintenance is explicit,
+   reviewed file work; only Kit performs managed-file/lock synchronization.
+   Inspect `git diff`, run template integrity and all consumer native gates,
+   and repeat plan (empty).
    Commit files and lock together. Create a Draft PR with old/new SHAs, complete
    diff, test evidence, publication classification and rollback. CI must match
    the exact HEAD; independent review and owner merge authorization are required.
@@ -112,7 +120,9 @@ never automatic replacement of project decisions.
 
 Export or retain the OLD bundle. Plan and explicitly write it with fresh digest
 and all changed paths; review deletion operations too. Commit rollback as a new
-consumer PR and rerun native gates. No history rewrite or automatic reset.
+consumer PR and rerun native gates. Restore the corresponding retained current
+bundle too (and the tooling Kit pin for a Kit rollback), keeping the superseded
+bundle separately. No history rewrite or automatic reset.
 The engine is atomic per file, not across files; keep a quiescent trusted checkout.
 If I/O fails halfway, preserve evidence and restore only affected managed files
 AND lock from the verified pre-update Git snapshot/backup after checking for
