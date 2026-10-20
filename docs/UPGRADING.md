@@ -5,10 +5,12 @@
 There are two independent channels: `.project-template/lock.json` records the
 full reviewed template source SHA and SHA-256 of managed admin files;
 `.engineering-kit/lock.json` records the separate installed Kit SHA/profile/hashes.
-`.project-template/tooling.json` pins the proposed admin-capable Kit implementation
-separately from the accepted baseline. Kit PR #10 is a dependency, not accepted
-main. Review it independently before real adoption. Do not claim these Draft
-sources have independent acceptance.
+`.project-template/tooling.json` pins the accepted admin-capable Kit implementation
+separately from the accepted baseline. Kit PR #10 and template PR #1 were
+independently accepted and merged. The reviewed PR-head/admin-source SHAs remain
+pinned; merge/package commits deliberately differ. This acceptance covers those
+revisions only: future changes still require independent review and owner merge
+authorization.
 
 Use a trusted local Kit checkout at the full implementation SHA from tooling.json;
 verify `git -C "$KIT" rev-parse HEAD` before executing it. In the examples KIT is
@@ -21,7 +23,19 @@ Both upstreams/distributions are private. Before copying into any public consume
 STOP: obtain separate publication authorization or a reviewed public-safe bundle.
 Neither hashes nor an offline export establish a license or redistribution rights.
 
-## New project (offline equivalent of Use this template)
+## New private project through GitHub Template
+
+The owner enabled this private repository as a GitHub Template; metadata was
+verified on 2026-10-20 (`is_template=true`, `private=true`). With owner-authorized
+repository creation, choose **Use this template → Create a new repository**,
+select the intended owner/name and **Private**, then verify the resulting
+repository's visibility and template provenance before cloning. Run the integrity
+checker and unit suite below on its initial commit, and confirm both retained
+bundles/locks match. Select project-native gates separately; template checks do
+not verify an application. Creating or deleting repositories and changing their
+visibility always require explicit authorization; this guide grants none.
+
+## New project (offline alternative)
 
 Choose a full template commit containing both locks and retained bundles. Review
 its provenance, classification and file list first. Use a new private local path;
@@ -46,8 +60,9 @@ must match the reviewed source; the lock need not equal the packaging HEAD.
 Complete docs/PROJECT.md, README, AGENTS.local.md and native CI. Local/scaffold
 files can change freely; keep managed lifecycle files byte-identical. Product
 checks remain UNVERIFIED until selected and run. Commit the initial snapshot and
-record the full source/package SHAs for review. GitHub template availability
-(`is_template`) is not assumed; this task does not change repository settings.
+record the full source/package SHAs for review. The offline path remains useful
+when GitHub creation permissions are unavailable; it does not test GitHub Template
+generation. No repository-settings change is part of this follow-up.
 
 ## One upstream change → one consumer proposal
 

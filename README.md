@@ -14,8 +14,9 @@ operation or use the [offline creation procedure](docs/UPGRADING.md). Run
 `python3 -B scripts/check_template.py` and
 `python3 -B -m unittest discover -s tests -v` with Python 3.11+ on POSIX.
 These validate administration only. Select and configure actual native CI before
-claiming product verification. GitHub `is_template` configuration is a separate
-owner action; this source PR does not change repository settings.
+claiming product verification. The owner enabled GitHub Template repository;
+`is_template=true` and private visibility were verified on 2026-10-20.
+Use **Use this template → Create a new repository** and select **Private**.
 
 Shared administration is versioned by full template source SHA and hashes in
 `.project-template/lock.json`; Kit is pinned independently in
@@ -26,6 +27,10 @@ update mechanism. No second sync engine is included here.
 The retained Engineering Kit baseline is
 `f808af695c7787fb68f332d8ff1214fb2100f9b5`. Its historical contracts/skills are
 labelled reference/provenance, not automatically activated instructions.
-The new admin channel requires the separately reviewed
-[Kit PR #10](https://github.com/AlexandrShapkin/codex-engineering-kit/pull/10).
-Independent acceptance and owner-authorized merge remain pending.
+The admin channel implementation was independently accepted and merged in
+[Kit PR #10](https://github.com/AlexandrShapkin/codex-engineering-kit/pull/10);
+the template was accepted and merged in
+[template PR #1](https://github.com/AlexandrShapkin/project-template/pull/1).
+The reviewed source SHAs remain pinned intentionally; acceptance does not repin
+bundles to merge commits or authorize consumer updates, merges or publication.
+See [release verification](docs/VERIFICATION.md) for evidence and limitations.
