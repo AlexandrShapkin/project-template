@@ -1,7 +1,7 @@
 # Documentation index
 
 Start with [project choices](PROJECT.md), [architecture](ARCHITECTURE.md),
-[workflow](WORKFLOW.md), [testing](TESTING.md), [security](SECURITY.md),
+[workflow](WORKFLOW.md), [upstream stages](ROADMAP.md), [testing](TESTING.md), [security](SECURITY.md),
 [decisions](DECISIONS/README.md) and [upgrades](UPGRADING.md).
 [Ownership](../.project-template/OWNERSHIP.md) distinguishes managed policy from
 project-owned documentation. TODO(owner) marks a deliberate unresolved choice;
@@ -9,3 +9,5 @@ resolve it before claiming product readiness.
 
 [Public distribution proposal](PUBLIC_DISTRIBUTION.md) records private staging
 and unresolved publication gates; it grants no release authority.
+
+Current bounded policy audit and Kit handoff: [Issues #6/#7](GOVERNANCE_AUDIT.md).

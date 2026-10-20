@@ -1,4 +1,5 @@
 Owning Issue:
+Actual priority / type / area labels; documented stage / applicable Milestone (or N/A with reason):
 Base SHA:
 Full HEAD SHA: (record in review handoff; never use a self-referential commit)
 
@@ -18,4 +19,6 @@ Independent technical review at exact HEAD: pending
 Formal GitHub approval: pending
 Owner merge authorization: not granted by this template
 Risks, data/publication classification, rollback and follow-ups:
-Cleanup inventory (removed / retained and why):
+Release applicability / compatibility / migration (or N/A with reason):
+Debt introduced / removed / outstanding (links, priority, owner, impact, completion criteria; or none):
+Cleanup inventory (removed / kept with reason / blocked or unknown with next action):

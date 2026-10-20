@@ -58,6 +58,12 @@ def pilot(kit):
         native = consumer / '.github/workflows/native.yml'
         native.write_text('# project-specific gate fixture\n')
         commit(consumer, 'Project-local choices')
+        draft = base / 'active-draft'
+        git(consumer, 'worktree', 'add', '-q', '-b', 'active-draft', str(draft))
+        evidence = draft / 'unique-evidence.txt'
+        evidence.write_text('Active Draft evidence; preserve uncommitted work\n')
+        draft_status = git(draft, 'status', '--porcelain')
+        local_project = (consumer / 'docs/PROJECT.md').read_bytes()
         source = base / 'upstream'
         source.mkdir()
         copy_template(source)
@@ -97,6 +103,10 @@ def pilot(kit):
         apply(consumer, old, 'admin')
         assert (consumer / 'AGENTS.local.md').read_text() == 'Mandatory native gate: keep\n'
         assert native.read_text() == '# project-specific gate fixture\n'
+        assert (consumer / 'docs/PROJECT.md').read_bytes() == local_project
+        assert evidence.read_text() == 'Active Draft evidence; preserve uncommitted work\n'
+        assert git(draft, 'status', '--porcelain') == draft_status
+        assert 'active-draft' in git(consumer, 'worktree', 'list', '--porcelain')
         assert (consumer / LOCK).read_bytes() == kit_before
         commit(consumer, 'Reviewed rollback fixture')
         from scripts.check_template import check

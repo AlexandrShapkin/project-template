@@ -160,3 +160,14 @@ source commits, updates one canonical lifecycle file, preserves local/native CI,
 checks separate Kit upgrades, rejects drift/symlinks/partial permissions and
 rolls back. This is offline adoption evidence, not public distribution or native
 application verification. Report results in the review handoff.
+
+## Governance migration safeguards
+
+Adopt the shared release, hygiene, debt and governance policy from the reviewed
+Template source; do not extend Kit's frozen legacy copies. The label manifest is
+initial scaffold, outside the existing managed file set. Existing consumers and
+Kit review it manually at the same source SHA and retain documented local
+area/stage extensions; this adds no lock field or sync channel. Preserve
+AGENTS.local.md, docs/PROJECT.md, native CI, active Draft worktrees and unique
+artifacts. Inventory references before retiring contradictory legacy activation.
+Kit #15 owns Kit-specific adoption; Kit #8 owns separately reviewed consumer PRs.
