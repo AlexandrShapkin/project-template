@@ -56,7 +56,7 @@ remain unchanged. No SemVer tag, Release or public format-3 artifact is created.
 
 An actual `codex exec` read-only, ephemeral instruction fixture was attempted with
 root AGENTS.md directing a read of AGENTS.local.md and a unique proof marker.
-The CLI exited 1 during initialization with filesystem/permission failure;
+The CLI exited 1 and emitted filesystem/permission errors;
 no marker response was obtained. Actual CLI discovery/compliance is therefore
 BLOCKED, not inferred from offline tests. The fixture was removed automatically.
 [Official instruction guidance](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
@@ -85,7 +85,8 @@ tracked above. Independent ChatGPT review and owner merge authority remain pendi
 ## Cleanup inventory
 
 Retained: this task's branch and future Draft PR for review; original local
-`fix/issue-2-release-status` branch and existing `/tmp/project-template-kit`
+`main`, `feat/universal-project-template` and `fix/issue-2-release-status` branches,
+and existing `/tmp/project-template-kit`
 checkout plus `/tmp/project-template-smoke-issue-2-20261020` evidence. The Kit
 checkout's untracked `.code-graph/` is pre-existing/unknown and untouched.
 No task-created persistent worktree or build output is required. Unittest,
@@ -94,3 +95,13 @@ the pilot's synthetic active Draft/evidence is confined to its own fixture.
 No user branch/worktree, remote resource or historical artifact was deleted;
 no reclaimed disk space is claimed. Review retained legacy resources separately
 only after ownership, references and recoverability are established.
+
+Local verification: `python3 -B scripts/check_template.py` PASS;
+`python3 -B -m unittest discover -s tests -v` PASS (13 tests);
+`python3 -B scripts/pilot.py --kit /tmp/project-template-kit` PASS.
+The pilot checks actual offline plan/write/rollback at pinned implementation
+`21cf2914cb0a1c904ca8c783a36723786373b600`, including active Draft worktree and
+unique uncommitted evidence preservation. Both live metadata reports PASS.
+Full diff, unchanged Kit pins/bytes, private ownership/classification and the six
+managed paths were checked. Exact-head CI and final package SHA are recorded in
+the Draft PR handoff to avoid a self-referential commit.
