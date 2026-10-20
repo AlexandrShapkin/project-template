@@ -13,3 +13,7 @@
 - [ ] TODO(owner): decide private/public distribution and license separately.
   Private upstream material is not cleared for public repositories.
 - [ ] TODO(owner): record reviewed upstream SHAs and retained bundles per UPGRADING.
+
+Template upstream stage navigation and current release applicability:
+[roadmap](ROADMAP.md). Replace this project-owned map on adoption; keep canonical
+rules in the development interface and native/product choices here.

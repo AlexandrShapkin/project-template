@@ -85,6 +85,41 @@ def full_sha(value, length=40):
     return isinstance(value, str) and re.fullmatch('[0-9a-f]{%d}' % length, value)
 
 
+def check_policy(root):
+    """Check discoverability even when a drifted bundle was rehashed consistently."""
+    interface = read_file(root / '.github/DEVELOPMENT_INTERFACE.md').decode('utf-8')
+    for heading in ('## Release contract', '### Distribution',
+                    '### Narrative release notes',
+                    '## Workspace hygiene and technical debt', '## GitHub governance'):
+        if heading not in interface:
+            raise ValueError('missing canonical policy section: ' + heading)
+    for name, reference in (('AGENTS.md', '.github/DEVELOPMENT_INTERFACE.md'),
+                            ('AGENTS.md', 'AGENTS.local.md'),
+                            ('docs/WORKFLOW.md', '../.github/DEVELOPMENT_INTERFACE.md')):
+        if reference not in read_file(root / name).decode('utf-8'):
+            raise ValueError('missing policy entrypoint: ' + name + ' -> ' + reference)
+    taxonomy = read_json(root / '.github/labels.json')
+    priorities = [f'priority:P{n}' for n in range(4)]
+    if (not isinstance(taxonomy, dict) or taxonomy.get('schema_version') != 1
+            or taxonomy.get('priority_order') != priorities
+            or not isinstance(taxonomy.get('labels'), list)):
+        raise ValueError('invalid label taxonomy')
+    names = set()
+    for label in taxonomy['labels']:
+        if (not isinstance(label, dict) or set(label) != {'name', 'color', 'description'}
+                or not isinstance(label['name'], str)
+                or not re.fullmatch(r'(priority|type|area|stage):[A-Za-z0-9_-]+', label['name'])
+                or label['name'] in names or not isinstance(label['color'], str)
+                or not re.fullmatch('[0-9A-Fa-f]{6}', label['color'])
+                or not isinstance(label['description'], str) or not label['description'].strip()):
+            raise ValueError('invalid or duplicate label definition')
+        names.add(label['name'])
+    if (not set(priorities) <= names
+            or any(not any(n.startswith(prefix) for n in names)
+                   for prefix in ('type:', 'area:', 'stage:'))):
+        raise ValueError('missing label classification family')
+
+
 def manifest(value, channel):
     fields = {'format', 'upstream', 'profile', 'files'}
     if channel == 'admin':
@@ -111,6 +146,10 @@ def manifest(value, channel):
 def check(root):
     root = Path(root).absolute()
     errors = []
+    try:
+        check_policy(root)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append(f'policy: {exc}')
     tooling = None
     try:
         tooling = read_json(root / '.project-template/tooling.json')
