@@ -1,0 +1,15 @@
+{
+  "files": {
+    ".github/DEVELOPMENT_INTERFACE.md": "44e0ef0c5277184ab12b5a203acb1a6b16160ad508dd998bc2f7aae054a5d07f",
+    ".github/ISSUE_TEMPLATE/task.yml": "bdfc374f9e01ab38a1190200f6f32a19162cd83d2779aface88b16562f3152e2",
+    ".github/pull_request_template.md": "045e913eb01dbb3333307d91451553d0bfd5d4d57696a3aa92ad6033e2c50830",
+    ".project-template/OWNERSHIP.md": "06e75bcf87324f42db1aa51a5987f8b87cf73a71314007cc80313205d9e44d3d",
+    "AGENTS.md": "772d646745ba0d7ff2df84b61e11258f6b500ebde570114640dc6c6e777a895c",
+    "docs/WORKFLOW.md": "db0ea92e2c9e5a849892d92685b08c0a1c5884d391946028643e996144e939b8"
+  },
+  "format": 2,
+  "owner": "AlexandrShapkin/project-template",
+  "profile": "administrative",
+  "publication": "private",
+  "upstream": "adfc75e686f7853a13618ee5858a775000f0a396"
+}
