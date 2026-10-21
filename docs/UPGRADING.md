@@ -176,3 +176,28 @@ area/stage extensions; this adds no lock field or sync channel. Preserve
 AGENTS.local.md, docs/PROJECT.md, native CI, active Draft worktrees and unique
 artifacts. Inventory references before retiring contradictory legacy activation.
 Kit #15 owns Kit-specific adoption; Kit #8 owns separately reviewed consumer PRs.
+
+## Public-source consumers adopted through Kit #8
+
+RustCraft, Assistant Hub, Codex Smart and RelayForge record direct reviewed source
+adoption in `.project-template/source.json` and `.engineering-kit/source.json`.
+These are not locks: do not run bundle adoption over them or convert them by hand.
+The Kit #8 source-update compatibility proposal reuses Kit's existing plan/write
+engine with fixed source mappings, installed/old-source hash checks, immutable
+source SHAs and exact path permissions. Template remains the only administrative
+source; Kit remains the only implementation. It does not grant artifact approval.
+
+The proposed operator procedure lives in Kit `docs/SOURCE_UPDATES.md`; authenticate
+and independently accept its exact implementation HEAD before production use.
+Select Template and Kit revisions separately; preserve AGENTS.local.md, local
+product/security rules, notices, native CI and the other channel. Each affected
+consumer gets a separate Draft PR and reviewed integrity-record hash change,
+exact-head native CI and independent acceptance. Owner merge remains explicit.
+Rollback uses the older source revision plus fresh plan/permissions; an ordinary
+reviewed revert restores exact historical record formatting and its test pin.
+Partial writes require restoring the affected files and record from a verified
+pre-write snapshot before retrying, preserving intervening user work.
+
+The original bundle protocol above is unchanged. Public source licensing does not
+approve public bundle bytes or permit skipping format-3 owner authorization.
+No polling, network updater, merge bot or additional policy source is introduced.
