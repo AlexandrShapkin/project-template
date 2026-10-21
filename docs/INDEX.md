@@ -13,3 +13,7 @@ and unresolved publication gates; it grants no release authority.
 Current bounded policy audit and Kit handoff: [Issues #6/#7](GOVERNANCE_AUDIT.md).
 
 Source publication: [status](PUBLICATION.md), [rights and notices](SOURCE_RIGHTS.md).
+
+First-version candidate: [qualification and rollback](RELEASING.md),
+[unpublished narrative notes](RELEASE_NOTES_v0.1.0.md). These supersede historical
+private-source/pending-rollout status for release preparation, without publishing.
