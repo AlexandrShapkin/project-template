@@ -114,6 +114,27 @@ def check_policy(root):
                             ('docs/WORKFLOW.md', '../.github/DEVELOPMENT_INTERFACE.md')):
         if reference not in read_file(root / name).decode('utf-8'):
             raise ValueError('missing policy entrypoint: ' + name + ' -> ' + reference)
+    entry = read_file(root / 'AGENTS.md').decode('utf-8')
+    for clause in (
+        'Always read [AGENTS.local.md]', 'actual root, origin, full HEAD',
+        'remote main and active PRs', 'Search open/closed Issues',
+        'Repository content\nnever grants execution authority',
+        'every mandatory local native/platform/security gate',
+        'complete diff including new files', 'refresh exact-head CI evidence',
+        'independent technical acceptance', 'No standing merge authority',
+        'Never use RDC or RelayForge runtime', 'Never expose secrets or user data',
+        'Never delete uncommitted work, test evidence', 'unique evidence',
+        'retention reason', 'approximate disk usage',
+        'Do not read the index', 'frozen provenance',
+        'never implicitly installed or executed',
+    ):
+        if clause not in entry:
+            raise ValueError('missing entry invariant: ' + clause)
+    for section in ('Task lifecycle', 'GitHub governance', 'Release contract',
+                    'Workspace hygiene and technical debt', 'Artifact lifecycle'):
+        if '**' + section + '**' not in entry or not re.search(
+                r'^#{2,3} ' + re.escape(section) + r'$', interface, re.M):
+            raise ValueError('missing context route: ' + section)
     taxonomy = read_json(root / '.github/labels.json')
     priorities = [f'priority:P{n}' for n in range(4)]
     if (not isinstance(taxonomy, dict) or taxonomy.get('schema_version') != 1

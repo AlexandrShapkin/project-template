@@ -1,7 +1,8 @@
 # Project-owned agent rules
 
 This file is never synchronized. Add specialized constraints here; do not copy
-shared lifecycle text. Read docs/PROJECT.md and docs/ARCHITECTURE.md for context.
+shared lifecycle text. Read docs/PROJECT.md and docs/ARCHITECTURE.md when
+project setup or architecture is relevant.
 
 - Native toolchain, commands and platform/security gates: TODO(owner), UNVERIFIED.
 - This template repository checks: `python3 -B scripts/check_template.py` and
