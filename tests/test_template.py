@@ -10,7 +10,7 @@ import sys
 import unittest
 from unittest import mock
 
-from scripts.check_template import CHANNELS, LIMIT, check
+from scripts.check_template import CHANNELS, LIMIT, check, check_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,6 +39,31 @@ class TemplateTests(unittest.TestCase):
         (self.root / 'AGENTS.local.md').write_text('Native gates: strict local test\n')
         (self.root / 'docs/ARCHITECTURE.md').write_text('Chosen native design\n')
         self.assertEqual(check(self.root), [])
+
+    def test_artifact_lifecycle_and_closeout_cannot_be_omitted(self):
+        # Check policy independently of hash drift, including consistently rehashed inputs.
+        for name, clauses in (
+            ('.github/DEVELOPMENT_INTERFACE.md', (
+                '### Artifact lifecycle',
+                'Prefer Git branches over duplicate repository clones',
+                'task isolation justifies them', 'Reuse trusted installed toolchains',
+                'Rust, Go or Python runtimes',
+                'owner/task, retention reason and cleanup conditions',
+                'approximate disk usage', 'without owner approval',
+                'no unique evidence or', 'active dependencies', 'Expiry triggers',
+                'Stronger project protections remain binding',
+            )),
+            ('.github/pull_request_template.md', (
+                'temporary paths', 'approximate disk usage', 'deletion safety',
+                'purpose, owner/task, retention reason, cleanup conditions',
+            )),
+        ):
+            original = (self.root / name).read_text()
+            for clause in clauses:
+                with self.subTest(name=name, clause=clause):
+                    with self.changed(name, original.replace(clause, 'omitted').encode()):
+                        with self.assertRaises(ValueError):
+                            check_policy(self.root)
 
     def test_creation_retains_license_outside_managed_channels(self):
         self.assertEqual((self.root / 'LICENSE').read_bytes(), (ROOT / 'LICENSE').read_bytes())
