@@ -90,9 +90,25 @@ def check_policy(root):
     interface = read_file(root / '.github/DEVELOPMENT_INTERFACE.md').decode('utf-8')
     for heading in ('## Release contract', '### Distribution',
                     '### Narrative release notes',
-                    '## Workspace hygiene and technical debt', '## GitHub governance'):
+                    '## Workspace hygiene and technical debt', '### Artifact lifecycle',
+                    '## GitHub governance'):
         if heading not in interface:
             raise ValueError('missing canonical policy section: ' + heading)
+    for clause in (
+        'Prefer Git branches over duplicate repository clones',
+        'task isolation justifies them', 'Reuse trusted installed toolchains',
+        'Rust, Go or Python runtimes', 'owner/task, retention reason and cleanup conditions',
+        'approximate disk usage', 'without owner approval',
+        'no unique evidence or', 'active dependencies',
+        'Expiry triggers', 'Stronger project protections remain binding',
+    ):
+        if clause not in interface:
+            raise ValueError('missing artifact lifecycle requirement: ' + clause)
+    closeout = read_file(root / '.github/pull_request_template.md').decode('utf-8')
+    for field in ('temporary paths', 'approximate disk usage', 'deletion safety',
+                  'purpose, owner/task, retention reason, cleanup conditions'):
+        if field not in closeout:
+            raise ValueError('missing artifact closeout field: ' + field)
     for name, reference in (('AGENTS.md', '.github/DEVELOPMENT_INTERFACE.md'),
                             ('AGENTS.md', 'AGENTS.local.md'),
                             ('docs/WORKFLOW.md', '../.github/DEVELOPMENT_INTERFACE.md')):
