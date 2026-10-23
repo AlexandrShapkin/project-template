@@ -52,7 +52,7 @@ class ProgressiveDisclosureTests(unittest.TestCase):
         old = json.loads((self.root / '.project-template/bundles/pre-progressive-disclosure.json').read_text())
         interface = (self.root / '.github/DEVELOPMENT_INTERFACE.md').read_text()
         original_lifecycle = old['contents']['.github/DEVELOPMENT_INTERFACE.md'].split('## Release contract', 1)[0]
-        updated_lifecycle = interface.split('## Task lifecycle\n\n', 1)[1].split('## Release contract', 1)[0]
+        updated_lifecycle = interface.replace('## Task lifecycle\n\n', '', 1).split('## Release contract', 1)[0]
 
         def without_review_gates(value):
             pattern = r'7\. \*\*INDEPENDENT REVIEW:\*\*.*?(?=9\. \*\*CLEANUP:\*\*)'
