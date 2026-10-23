@@ -4,12 +4,12 @@
     ".github/ISSUE_TEMPLATE/task.yml": "4e0302c98a6a9ebfe1d78dc09865d81080e2487d71b5753e2e4d299ae1537dfb",
     ".github/pull_request_template.md": "28dd4dfbe8bb15f4b8833545d1378327a07445e29d8b45937e412489c516ce3a",
     ".project-template/OWNERSHIP.md": "4aac2285025e41b8f30ea1635e53c2260d558500117df7b89db5f84c4e55dc77",
-    "AGENTS.md": "1025d8aea2ea1e50c717d2e2efed3cb8133ae483c00719f9a8658d18ce1de65e",
+    "AGENTS.md": "97b975d6581996e2054e85625fac3ed160b622aec677f6a20cc72dc96f954071",
     "docs/WORKFLOW.md": "923fd338abe7aa969505f52c764f5fae2921e3feaae681957b664415754988a6"
   },
   "format": 2,
   "owner": "AlexandrShapkin/project-template",
   "profile": "administrative",
   "publication": "private",
-  "upstream": "4d765a3ba70e6e6c7e8bfdd675e30e0c0ae7ee5f"
+  "upstream": "935022f96e0654d997d511dce79ab022dcae9d92"
 }
