@@ -106,7 +106,8 @@ def check_policy(root):
             raise ValueError('missing artifact lifecycle requirement: ' + clause)
     closeout = read_file(root / '.github/pull_request_template.md').decode('utf-8')
     for field in ('temporary paths', 'approximate disk usage', 'deletion safety',
-                  'purpose, owner/task, retention reason, cleanup conditions'):
+                  'purpose, owner/task, retention reason, cleanup conditions',
+                  'Formal GitHub APPROVE: optional', 'Owner merge authorization: explicit PR or bounded series'):
         if field not in closeout:
             raise ValueError('missing artifact closeout field: ' + field)
     for name, reference in (('AGENTS.md', '.github/DEVELOPMENT_INTERFACE.md'),
@@ -114,6 +115,14 @@ def check_policy(root):
                             ('docs/WORKFLOW.md', '../.github/DEVELOPMENT_INTERFACE.md')):
         if reference not in read_file(root / name).decode('utf-8'):
             raise ValueError('missing policy entrypoint: ' + name + ' -> ' + reference)
+    for clause in ('Single-human-maintainer workflow',
+                   'GitHub APPROVE is optional', 'never fabricate',
+                   'independent ACCEPT', 'applicable GitHub protection pass',
+                   'Ordinary in-scope reads, edits, tests, commits and Draft PR handoffs',
+                   'Codex sandbox approvals remain separate',
+                   'separately explicit authority'):
+        if clause not in interface:
+            raise ValueError('missing solo-maintainer governance: ' + clause)
     entry = read_file(root / 'AGENTS.md').decode('utf-8')
     for clause in (
         'Always read [AGENTS.local.md]', 'actual root, origin, full HEAD',
@@ -122,6 +131,8 @@ def check_policy(root):
         'every mandatory local native/platform/security gate',
         'complete diff including new files', 'refresh exact-head CI evidence',
         'independent technical acceptance', 'No standing merge authority',
+        'Solo-maintainer workflow', 'GitHub APPROVE is optional',
+        'bounded PR series', 'Sandbox approval controls remain separate',
         'Never use RDC or RelayForge runtime', 'Never expose secrets or user data',
         'Never delete uncommitted work, test evidence', 'unique evidence',
         'retention reason', 'approximate disk usage',
