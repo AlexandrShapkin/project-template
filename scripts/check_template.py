@@ -117,7 +117,7 @@ def check_policy(root):
             raise ValueError('missing policy entrypoint: ' + name + ' -> ' + reference)
     for clause in ('Single-human-maintainer workflow',
                    'GitHub APPROVE is optional', 'never fabricate',
-                   'independent ACCEPT', 'actual GitHub protection',
+                   'independent ACCEPT', 'applicable GitHub protection pass',
                    'Ordinary in-scope reads, edits, tests, commits and Draft PR handoffs',
                    'Codex sandbox approvals remain separate',
                    'separately explicit authority'):
