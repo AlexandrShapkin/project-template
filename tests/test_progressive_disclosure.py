@@ -51,13 +51,20 @@ class ProgressiveDisclosureTests(unittest.TestCase):
     def test_lifecycle_requirements_outside_review_gates_unchanged_and_channel_ownership_preserved(self):
         old = json.loads((self.root / '.project-template/bundles/pre-progressive-disclosure.json').read_text())
         interface = (self.root / '.github/DEVELOPMENT_INTERFACE.md').read_text()
-        def without_review_gates(text):
-            return re.sub(r'7\\. \\*\\*INDEPENDENT REVIEW:\\*\\*.*?(?=9\\. \\*\\*CLEANUP:\\*\\*)',
-                          '<review and merge gate>\\n', text, flags=re.S)
+        original_lifecycle = old['contents']['.github/DEVELOPMENT_INTERFACE.md'].split('## Release contract', 1)[0]
+        updated_lifecycle = interface.split('## Task lifecycle\n\n', 1)[1].split('## Release contract', 1)[0]
 
-        self.assertEqual(
-            without_review_gates(interface.replace('## Task lifecycle\n\n', '', 1)),
-            without_review_gates(old['contents']['.github/DEVELOPMENT_INTERFACE.md']))
+        def without_review_gates(value):
+            pattern = r'7\. \*\*INDEPENDENT REVIEW:\*\*.*?(?=9\. \*\*CLEANUP:\*\*)'
+            if not re.search(pattern, value, flags=re.S):
+                self.fail('missing numbered review/merge gates')
+            return re.sub(pattern, '<review and merge gate>\n', value, flags=re.S)
+
+        self.assertEqual(without_review_gates(updated_lifecycle),
+                         without_review_gates(original_lifecycle))
+        for heading in ('Release contract', 'Workspace hygiene and technical debt'):
+            self.assertEqual(section(interface, heading),
+                             section(old['contents']['.github/DEVELOPMENT_INTERFACE.md'], heading))
         current = json.loads((self.root / '.project-template/bundles/initial.json').read_text())
         self.assertEqual(set(current['contents']), ADMIN_FILES)
         self.assertEqual(current['contents']['AGENTS.md'], (self.root / 'AGENTS.md').read_text())
