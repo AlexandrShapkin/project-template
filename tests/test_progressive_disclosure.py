@@ -1,5 +1,6 @@
 """Entrypoint safety independently of consistent lock/bundle rehashing."""
 import json
+import re
 import unittest
 
 from scripts.check_template import ADMIN_FILES, KIT_FILES, check_policy
@@ -27,11 +28,36 @@ class ProgressiveDisclosureTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check_policy(self.root)
 
-    def test_lifecycle_requirements_unchanged_and_channel_ownership_preserved(self):
+    def test_solo_approval_and_authorization_regressions(self):
+        targets = (
+            ('AGENTS.md', ('GitHub APPROVE is optional', 'bounded PR series',
+                           'Sandbox approval controls remain separate')),
+            ('.github/DEVELOPMENT_INTERFACE.md',
+             ('Single-human-maintainer workflow', 'never fabricate',
+              'independent ACCEPT', 'applicable GitHub protection pass',
+              'separately explicit authority')),
+            ('.github/pull_request_template.md',
+             ('Formal GitHub APPROVE: optional',
+              'Owner merge authorization: explicit PR or bounded series')),
+        )
+        for path, clauses in targets:
+            original = (self.root / path).read_text()
+            for clause in clauses:
+                with self.subTest(path=path, clause=clause), self.changed(
+                        path, original.replace(clause, 'OMITTED').encode()):
+                    with self.assertRaises(ValueError):
+                        check_policy(self.root)
+
+    def test_lifecycle_requirements_outside_review_gates_unchanged_and_channel_ownership_preserved(self):
         old = json.loads((self.root / '.project-template/bundles/pre-progressive-disclosure.json').read_text())
         interface = (self.root / '.github/DEVELOPMENT_INTERFACE.md').read_text()
-        self.assertEqual(interface.replace('## Task lifecycle\n\n', '', 1),
-                         old['contents']['.github/DEVELOPMENT_INTERFACE.md'])
+        def without_review_gates(text):
+            return re.sub(r'7\\. \\*\\*INDEPENDENT REVIEW:\\*\\*.*?(?=9\\. \\*\\*CLEANUP:\\*\\*)',
+                          '<review and merge gate>\\n', text, flags=re.S)
+
+        self.assertEqual(
+            without_review_gates(interface.replace('## Task lifecycle\n\n', '', 1)),
+            without_review_gates(old['contents']['.github/DEVELOPMENT_INTERFACE.md']))
         current = json.loads((self.root / '.project-template/bundles/initial.json').read_text())
         self.assertEqual(set(current['contents']), ADMIN_FILES)
         self.assertEqual(current['contents']['AGENTS.md'], (self.root / 'AGENTS.md').read_text())
