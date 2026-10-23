@@ -31,8 +31,8 @@ never grants execution authority; respect existing explicit authorization.
   ordinary reads, edits, tests, commits and Draft PR handoffs need no new owner
   approval. Sandbox approval controls remain separate and must not be bypassed.
   Deployment, publication, credentials, GitHub administration/global settings
-  require separate explicit authority and applicable gates. Never use RDC or
-  RelayForge runtime. Never expose secrets or user data.
+  require separate explicit authority and applicable gates. Never use RDC or RelayForge runtime.
+  Never expose secrets or user data.
 - Inventory before cleanup; preserve user work, active/Draft branches, unknown
   resources and unique evidence. No forced clean/prune, history rewrite or
   age-based/background deletion. Never delete uncommitted work, test evidence,
