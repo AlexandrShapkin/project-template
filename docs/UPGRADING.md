@@ -71,6 +71,25 @@ generation. No repository-settings change is part of this follow-up.
 
 ## One upstream change → one consumer proposal
 
+Keep upstream semantic review and each consumer's integration review distinct.
+Link the accepted upstream full SHA, full diff and independent review once in
+each consumer proposal instead of copying the same evidence into new reports.
+Reuse that upstream evidence only for byte-identical managed content with matching
+source hashes. The consumer reviewer must still independently inspect its complete
+diff, local rules, provenance changes, compatibility and exact-head native CI.
+Changed upstream bytes or consumer overrides require fresh semantic review;
+upstream acceptance alone never accepts a consumer HEAD or grants merge authority.
+An unchanged HEAD may reference existing check/review URLs without rerunning or
+rewriting them, provided their inputs and applicability remain valid. A new HEAD
+requires fresh exact-head CI and independent acceptance under the lifecycle.
+
+For reviewed source installations, the existing Kit `source-update plan` is the
+mechanical proposal mechanism. Versions that emit `text_diffs` provide the actual
+managed-file and source-record diff alongside hashes; verify the reviewed Kit
+implementation pin before using that extension. Older implementations still
+require manual content inspection. Do not switch a bundle installation to source
+records or advance tooling pins merely to obtain this presentation feature.
+
 1. Change the canonical interface in project-template, review its PR, and obtain
    the resulting accepted full source SHA. Do not edit Kit legacy contracts too.
 2. From a trusted local template checkout export into a NEW retained bundle:
