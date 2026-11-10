@@ -1,4 +1,4 @@
-name: Template administration checks
+name: Template checks
 on:
   push:
     branches: [main]
@@ -8,7 +8,7 @@ permissions:
   contents: read
 jobs:
   template:
-    name: Administrative integrity (not product CI)
+    name: Template integrity
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
